@@ -1,0 +1,40 @@
+Changes in module 'nf-core/gatk4/markduplicates'
+--- modules/nf-core/gatk4/markduplicates/main.nf
++++ modules/nf-core/gatk4/markduplicates/main.nf
+@@ -38,20 +38,28 @@
+     """
+     gatk --java-options "-Xmx${avail_mem}M" MarkDuplicates \\
+         $input_list \\
+-        --OUTPUT ${prefix} \\
+-        --METRICS_FILE ${prefix}.metrics \\
++        --OUTPUT ${prefix}.md.bam \\
++        --METRICS_FILE ${prefix}.md.metrics \\
+         --TMP_DIR . \\
++        --CREATE_INDEX \\
+         ${reference} \\
+         $args
+ 
+-
+-    if  [[ ${prefix} == *.cram ]]; then
+-        mv ${prefix}.bai ${prefix}.crai
+-    fi
++    mv ${prefix}.md.bai ${prefix}.md.bam.bai
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+         gatk4: \$(echo \$(gatk --version 2>&1) | sed 's/^.*(GATK) v//; s/ .*\$//')
+     END_VERSIONS
+     """
++
++    stub:
++    prefix = task.ext.prefix ?: "${meta.id}"
++
++    """
++    touch ${prefix}.md.bam
++    touch ${prefix}.md.bam.bai
++    touch ${prefix}.md.metrics
++    echo -e '${task.process}:\\n  stub: noversions\\n' > versions.yml
++    """
+ }
+
+************************************************************

@@ -1,0 +1,28 @@
+{
+    "name": "umccr/star-align-nf",
+    "homePage": "https://github.com/umccr/star-align-nf",
+    "repos": {
+        "https://github.com/nf-core/modules.git": {
+            "modules": {
+                "nf-core": {
+                    "custom/dumpsoftwareversions": {
+                        "branch": "master",
+                        "git_sha": "8022c68e7403eecbd8ba9c49496f69f8c49d50f0"
+                    },
+                    "gatk4/markduplicates": {
+                        "branch": "master",
+                        "git_sha": "643756685546fa61f5c8fba439af746c090b9180",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/gatk4/markduplicates/gatk4-markduplicates.diff"
+                    },
+                    "samtools/sort": {
+                        "branch": "master",
+                        "git_sha": "0f8a77ff00e65eaeebc509b8156eaa983192474b",
+                        "installed_by": ["modules"],
+                        "patch": "modules/nf-core/samtools/sort/samtools-sort.diff"
+                    }
+                }
+            }
+        }
+    }
+}
