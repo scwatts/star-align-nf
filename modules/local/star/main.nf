@@ -2,7 +2,7 @@ process STAR {
     tag "${meta.id}"
     label 'process_medium'
 
-    container 'quay.io/biocontainers/star:2.7.3a--0'
+    container 'docker.io/scwatts/star:2.7.3a--1'
 
     input:
     tuple val(meta), path(fastq_fwd), path(fastq_rev)
